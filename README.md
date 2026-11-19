@@ -129,7 +129,7 @@ Restart the GUI after adding a bundle layer, then start a **new session** and ch
 
 Everything the mode is made of lives in `cordis.patch.yml`:
 
-- `persona.prefix` — the standing methodology (about 4,000 characters)
+- `persona.prefix` — the standing methodology (about 3,500 characters)
 - `persona.suffix` — the pre-delivery checklist
 - `plugins` — the tool rows mounted into the preset
 

@@ -2,6 +2,28 @@
 
 All notable changes to this project are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-11-19
+
+### Added
+
+- Four behavioural rules in the persona, each aimed at a failure mode seen in a real humanities session:
+  - **Diagnosis ships with the smallest usable draft.** A complaint such as "this section doesn't read clearly" is a revision request, not a question: the problem list must be followed by pasteable replacement text for that passage.
+  - **Rewrite, rewrite-again, and polish requests deliver the artefact**, not a description of what the artefact should contain.
+  - **State the kind of study and why the materials belong together** when framing a research question; materials that each stand alone do not make a systemic problem.
+  - **Workspace drafts are material, not instructions.** A draft left by an earlier session is not the text the user is asking about, and it carries no presumption of correctness; cite it in one line instead of turning the answer into a review of it. This one is preventive: it rests on a single observed case.
+
+### Changed
+
+- Persona compressed from 3,950 to 3,482 characters while gaining the four rules above. The LaTeX section drops from 1,227 to 471 characters: engine choice, project layout, bibliography backends, log triage, and submission checks now live only in the `latex-paper` skill, which the persona instructs the model to load before touching a `.tex` project.
+- Generic English mechanics advice (subject-verb agreement, articles) removed from the persona; it restated what the model already does.
+- README notes the persona's size as about 3,500 characters.
+
+### Evidence
+
+- Rule 1 and 2 were A/B tested on the same model: draft delivery rose from 1/2 to 2/2 runs, and the "two-variant inconsistency" catch from 1/2 to 2/2.
+- Rule 3 raised the "why must these be examined together" framing from 0/2 to 2/2.
+- Compression was regression-tested on the Debian `gbt7714.sty` task (2/2 correct package, versus 2/3 before) and the topic-narrowing task (unchanged). Two replicates per cell, one model, two tasks: this shows no observed regression, not equivalence.
+
 ## [1.2.1] - 2026-11-19
 
 ### Removed
@@ -37,6 +59,7 @@ All notable changes to this project are documented in this file. The format foll
 
 - Initial public snapshot of the paper-writing preset: a standing Chinese methodology prompt, 17 plugin rows, Chinese and English Plugins-page locale files, an icon, and the MIT license.
 
+[1.3.0]: https://github.com/revive/dsh-paper-mode/compare/v1.2.1...v1.3.0
 [1.2.1]: https://github.com/revive/dsh-paper-mode/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/revive/dsh-paper-mode/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/revive/dsh-paper-mode/releases/tag/v1.1.0

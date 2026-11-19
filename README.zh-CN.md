@@ -129,7 +129,7 @@ dsh plugin --profile <name> add dsh-paper-mode
 
 模式的全部内容都在 `cordis.patch.yml`：
 
-- `persona.prefix`：常驻方法论（约 4000 字）
+- `persona.prefix`：常驻方法论（约 3500 字）
 - `persona.suffix`：交付前自查清单
 - `plugins`：该模式挂载的插件行
 
