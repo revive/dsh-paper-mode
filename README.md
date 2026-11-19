@@ -152,7 +152,7 @@ The methodology prompt is Chinese by design. [docs/PROMPT-LANGUAGE.md](docs/PROM
 │   └── DEPENDENCIES.md         # dependency matrix and compatibility policy
 ├── skills/latex-paper/         # bundled LaTeX skill (references, scripts, templates)
 ├── scripts/check-bundle.mjs    # validation used by CI and contributors
-├── .github/                    # CI, release, topics workflows and scripts
+├── .github/                    # CI and release workflows, topic list, helper scripts
 ├── CHANGELOG.md
 ├── README.md                   # this file
 ├── README.zh-CN.md             # Chinese README
@@ -198,7 +198,13 @@ dsh --profile papertest --dump-config | grep -A3 'preset-paper'
 
 ## Repository topics
 
-GitHub topics make the project findable. The intended set is kept in [`.github/topics.txt`](.github/topics.txt) and can be applied with [`.github/scripts/set-topics.sh`](.github/scripts/set-topics.sh) or the `topics` workflow (needs a token with repository administration write). Use GitHub's **About → Topics** editor to apply them by hand if you prefer.
+The intended set lives in [`.github/topics.txt`](.github/topics.txt) and is set once, by hand — **About → Topics** on the repository page, or:
+
+```bash
+GH_TOKEN=<token with repository administration write> bash .github/scripts/set-topics.sh
+```
+
+Topics are metadata, not a delivery channel: this bundle is discovered through the DSH plugin market and npm, both of which read `package.json` `keywords`. There is deliberately no workflow for this. Syncing six strings would mean storing a repository-administration token in the repository's secrets, and the broad topics (`latex`, `ai-agent`) hold tens of thousands of repositories anyway.
 
 ## Limitations
 

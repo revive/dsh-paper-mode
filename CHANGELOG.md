@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1] - 2026-11-19
+
+### Removed
+
+- The `topics` workflow. Repository topics are now set once by hand (About → Topics, or `.github/scripts/set-topics.sh`). Syncing them from CI required storing a repository-administration token, and topics are not a delivery channel for a bundle that is discovered through the DSH plugin market and npm keywords. The list also drops from 15 to 6 topics, keeping only the ones narrow enough to surface anything.
+
 ## [1.2.0] - 2026-11-19
 
 ### Added
@@ -31,5 +37,6 @@ All notable changes to this project are documented in this file. The format foll
 
 - Initial public snapshot of the paper-writing preset: a standing Chinese methodology prompt, 17 plugin rows, Chinese and English Plugins-page locale files, an icon, and the MIT license.
 
+[1.2.1]: https://github.com/revive/dsh-paper-mode/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/revive/dsh-paper-mode/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/revive/dsh-paper-mode/releases/tag/v1.1.0

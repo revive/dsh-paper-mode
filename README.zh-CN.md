@@ -152,7 +152,7 @@ LaTeX 技能在 `skills/latex-paper/`。改完重新安装 bundle，新会话即
 │   └── DEPENDENCIES.md         # 依赖矩阵与兼容策略
 ├── skills/latex-paper/         # 自带 LaTeX 技能（references、scripts、templates）
 ├── scripts/check-bundle.mjs    # CI 与本地共用的校验脚本
-├── .github/                    # CI、发布、topics 工作流与脚本
+├── .github/                    # CI 与发布工作流、topic 清单、辅助脚本
 ├── CHANGELOG.md
 ├── README.md                   # 英文 README
 ├── README.zh-CN.md             # 本文件
@@ -198,7 +198,13 @@ dsh --profile papertest --dump-config | grep -A3 'preset-paper'
 
 ## 仓库 Topics
 
-GitHub topics 决定项目能否被搜到。推荐集合放在 [`.github/topics.txt`](.github/topics.txt)，可用 [`.github/scripts/set-topics.sh`](.github/scripts/set-topics.sh) 或 `topics` 工作流写入（需要具备仓库管理写权限的 token）；也可以直接在 GitHub 的 **About → Topics** 里手动添加。
+推荐集合放在 [`.github/topics.txt`](.github/topics.txt)，手动设置一次即可——在仓库页的 **About → Topics**，或：
+
+```bash
+GH_TOKEN=<具备仓库管理写权限的 token> bash .github/scripts/set-topics.sh
+```
+
+topic 是元数据，不是分发渠道：这个 bundle 通过 DSH 插件市场和 npm 被发现，两者读的是 `package.json` 的 `keywords`。所以仓库里**刻意没有**对应的工作流——为了同步六个字符串而在 Secrets 里存一个仓库管理 token 不划算，而且 `latex`、`ai-agent` 这类大 topic 下面有几万个仓库，本来就露不出来。
 
 ## 限制
 

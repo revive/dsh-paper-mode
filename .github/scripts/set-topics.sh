@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
-# Replace this repository's GitHub topics with the list in .github/topics.txt.
+# Set this repository's GitHub topics to the list in .github/topics.txt.
+#
+# This is a one-off helper, not part of CI: GITHUB_TOKEN cannot change
+# repository topics, and storing a repository-administration token in the
+# repository's secrets to sync a short list is not worth it. Run it by hand
+# when the list changes, or edit About -> Topics on the repository page.
 #
 # Usage:
 #   GH_TOKEN=<token with repository administration write> \
 #     bash .github/scripts/set-topics.sh [topics-file]
 #
-# Requires gh and jq. The token must be allowed to call
-# PUT /repos/{owner}/{repo}/topics. GITHUB_TOKEN in Actions cannot; use a
-# fine-grained token with Administration: write or a classic token with the repo
-# scope.
 set -euo pipefail
 
 : "${GH_TOKEN:?GH_TOKEN is required}"
