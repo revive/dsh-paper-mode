@@ -1,0 +1,22 @@
+# GitHub repository topics, one per line. Blank lines and lines starting
+# with # are ignored. GitHub allows at most 20 topics.
+#
+# Apply them with:
+#   GH_TOKEN=<token> bash .github/scripts/set-topics.sh
+# or run the "topics" workflow, or edit About -> Topics on the repository page.
+
+deepseek-harness
+dsh
+dsh-plugin
+agent-preset
+academic-writing
+paper
+thesis
+dissertation
+latex
+xelatex
+bibtex
+literature-review
+citation
+research-writing
+ai-agent

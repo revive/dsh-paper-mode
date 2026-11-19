@@ -1,0 +1,31 @@
+name: topics
+
+# Apply the repository topics listed in .github/topics.txt to this repository's
+# About panel. Run it manually after creating the repository, or after editing
+# the list. It needs a secret token with repository administration write access,
+# because GITHUB_TOKEN cannot change repository topics.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Apply topics
+        env:
+          GH_TOKEN: ${{ secrets.REPO_ADMIN_TOKEN }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::warning::REPO_ADMIN_TOKEN is not configured. Add a token with repository administration write access, or set the topics by hand under Settings -> Topics."
+            echo "Topics listed in .github/topics.txt:"
+            grep -vE '^[[:space:]]*(#|$)' .github/topics.txt
+            exit 0
+          fi
+          bash .github/scripts/set-topics.sh

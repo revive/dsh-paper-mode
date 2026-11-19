@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Paper writing",
-    "description": "An agent mode for academic writing: topic framing, literature review, structure and argument, language editing, citation practice, and submission review.",
-    "detail": "docs/DETAIL.md"
+    "description": "An agent preset for academic paper writing: topic framing, literature review, structure and argument, language editing, citation practice, LaTeX builds, and submission review.",
+    "detail": "docs/DETAIL.en.md"
   }
 }

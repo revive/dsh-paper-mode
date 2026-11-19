@@ -1,0 +1,11 @@
+# latexmk configuration for an XeLaTeX paper (Chinese or Unicode-heavy).
+# Copy beside main.tex as .latexmkrc, then run: latexmk main.tex
+#
+# For an English pdfLaTeX paper set $pdf_mode = 1 and drop $xelatex.
+# For LuaLaTeX set $pdf_mode = 4 and use $lualatex.
+
+$pdf_mode = 5;                 # 1 = pdflatex, 4 = LuaLaTeX, 5 = XeLaTeX
+$xelatex = 'xelatex -interaction=nonstopmode -halt-on-error -file-line-error -synctex=1 %O %S';
+$bibtex_use = 1;               # run BibTeX/Biber when the aux files ask for it
+$max_repeat = 6;               # stop runaway reruns instead of looping
+$clean_ext = 'bbl run.xml synctex.gz';

@@ -1,5 +1,10 @@
 * text=auto eol=lf
 *.yml text eol=lf
+*.yaml text eol=lf
 *.json text eol=lf
 *.md text eol=lf
 *.svg text eol=lf
+*.sh text eol=lf
+*.mjs text eol=lf
+*.tex text eol=lf
+*.bib text eol=lf

@@ -1,0 +1,47 @@
+% Minimal XeLaTeX skeleton for a Chinese or mixed-language paper.
+% Copy beside sections/, figures/, and refs.bib, then run:
+%   latexmk -xelatex main.tex        (or: bash latex-build.sh main.tex)
+%
+% For an English pdfLaTeX paper: replace ctexart with article, remove the
+% CJK font line, and compile with latexmk -pdf.
+
+\documentclass[UTF8,a4paper,12pt]{ctexart}
+
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[hidelinks]{hyperref}
+
+\graphicspath{{figures/}}
+% Uncomment after installing Noto CJK; ctex otherwise uses the bundled Fandol.
+% \setCJKmainfont{Noto Serif CJK SC}
+
+\title{论文题目}
+\author{作者姓名}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+一段话说清问题、方法、主要结果与意义。不引用文献，不出现未定义缩写。
+\end{abstract}
+
+\section{引言}\label{sec:introduction}
+...
+
+\section{方法}\label{sec:method}
+...
+
+\section{结果}\label{sec:results}
+...
+
+\section{讨论}\label{sec:discussion}
+...
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\end{document}

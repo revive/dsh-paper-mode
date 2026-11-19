@@ -1,0 +1,130 @@
+name: release
+
+# Build the tarball in the cloud and attach it to a GitHub Release whenever a
+# v* tag is pushed (for example: git tag v1.2.0 && git push origin v1.2.0).
+#
+# The release body is CHANGELOG.md's section for that version, with a standard
+# install footer appended (see .github/scripts/compose-release-notes.sh). A
+# version without a changelog section falls back to GitHub's generated notes,
+# so a release never blocks on a changelog omission. The same composition is
+# exposed as a manual workflow that rewrites the notes of an existing release
+# without touching its assets.
+#
+# The package has no build step: the tarball is the packaged source, locale
+# files, docs, and the bundled LaTeX skill.
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version whose release notes to (re)compose, e.g. 1.2.0'
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  pack:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify tag matches package version
+        id: version
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          VERSION="${TAG#v}"
+          PKG="$(node -p "require('./package.json').version")"
+          if [ "$VERSION" != "$PKG" ]; then
+            echo "tag $TAG does not match package.json version $PKG"
+            exit 1
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Validate bundle
+        run: pnpm run check
+
+      - name: Compose release notes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash .github/scripts/compose-release-notes.sh "${{ steps.version.outputs.version }}" > /tmp/notes.md
+
+      - name: Pack tarball
+        run: pnpm pack
+
+      - name: Write checksum
+        run: |
+          TGZ="dsh-paper-mode-${{ steps.version.outputs.version }}.tgz"
+          sha256sum "$TGZ" > "$TGZ.sha256"
+          cat "$TGZ.sha256"
+
+      - name: Create or update the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          VERSION="${{ steps.version.outputs.version }}"
+          TGZ="dsh-paper-mode-$VERSION.tgz"
+          if ! gh release create "$TAG" \
+            --title "dsh-paper-mode $VERSION" \
+            --notes-file /tmp/notes.md; then
+            gh release edit "$TAG" \
+              --title "dsh-paper-mode $VERSION" \
+              --notes-file /tmp/notes.md
+          fi
+          gh release upload "$TAG" "$TGZ" "$TGZ.sha256" --clobber
+
+  notes:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout default branch
+        uses: actions/checkout@v4
+        with:
+          # The generated-notes fallback resolves the previous tag with git describe.
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Compose release notes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+            echo "version must look like 1.2.0 or 1.2.0-rc.1, got: $VERSION"
+            exit 1
+          fi
+          bash .github/scripts/compose-release-notes.sh "$VERSION" > /tmp/notes.md
+
+      - name: Update the release body
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ inputs.version }}
+        run: gh release edit "v$VERSION" --notes-file /tmp/notes.md
