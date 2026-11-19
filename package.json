@@ -1,0 +1,40 @@
+{
+  "name": "@local/dsh-paper-preset",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Paper writing mode: an agent preset for academic topic framing, literature review, structure, argument, language, citation, and submission review.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/revive/dsh-paper-mode.git"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "agent-preset",
+    "academic-writing",
+    "paper"
+  ],
+  "exports": {
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./*": "./*"
+  },
+  "files": [
+    "cordis.patch.yml",
+    "locale/*.json",
+    "docs/DETAIL.md",
+    "icon.svg",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "dsh": ">=0.2.2-rc.3 <0.4.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

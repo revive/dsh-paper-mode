@@ -1,0 +1,12 @@
+# Packed bundles
+dist/
+*.tgz
+
+# Dependencies
+node_modules/
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
