@@ -37,7 +37,19 @@
 
 ## LaTeX 支持
 
-Bundle 自带 `latex-paper` 技能，通过 `skill-filesystem` 自动挂载：
+Bundle 自带两个技能，通过 `skill-filesystem` 自动挂载：
+
+```text
+skills/paper-decisions/
+├── SKILL.md                     # 决策记录 + 理论结构：改前读、改后写
+└── templates/
+    ├── decisions.md             # 只追加的日志：日期/类型/触发/候选/判据/裁定/理由/影响/状态
+    └── theory-map.md            # 理论 → 构念 → 操作化 → 章节 → 检验，附 mermaid 结构图
+```
+
+`paper-decisions` 解决的是论文跨会话之后必然丢失的东西：某条意见为什么被采纳或拒绝、几个方案按什么标准裁定的、文献为什么引这篇不引那篇、理论结构怎么落到章节。改动结构前先读既有裁定，改完追加一条。mermaid 块在 Typora / Obsidian / GitHub 能画，DSH 聊天界面不能——聊天里用表格或缩进大纲。
+
+第二个技能是 `latex-paper`：
 
 ```text
 skills/latex-paper/
@@ -150,7 +162,9 @@ LaTeX 技能在 `skills/latex-paper/`。改完重新安装 bundle，新会话即
 │   ├── DETAIL.en.md            # Plugins 详情页（英文）
 │   ├── DETAIL.zh.md            # Plugins 详情页（中文）
 │   └── DEPENDENCIES.md         # 依赖矩阵与兼容策略
-├── skills/latex-paper/         # 自带 LaTeX 技能（references、scripts、templates）
+├── skills/
+│   ├── latex-paper/            # LaTeX 技能（references、scripts、templates）
+│   └── paper-decisions/        # 决策记录 + 理论结构技能（templates）
 ├── scripts/check-bundle.mjs    # CI 与本地共用的校验脚本
 ├── .github/                    # CI 与发布工作流、topic 清单、辅助脚本
 ├── CHANGELOG.md

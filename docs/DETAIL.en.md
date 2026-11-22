@@ -30,6 +30,7 @@ The standing prompt is organized by writing stage:
 - Shell: bash on Linux and macOS, PowerShell on Windows, enabled by host platform
 - Web search and fetch for verifying real sources
 - The bundled `latex-paper` skill: toolchain report, build script, project templates, troubleshooting, and submission references
+- The bundled `paper-decisions` skill: an append-only decision log and a living theory map kept in the paper repository, with a read-before-write loop and a conflict-check procedure
 - Office skills plus Office render/convert for docx delivery and PDF layout inspection
 - Todo list, user questions, working directory, deliverable presentation
 - Subagents and workflow for parallel literature sweeps, chapter drafts, and independent review
@@ -56,4 +57,4 @@ The standing prompt is organized by writing stage:
 
 ## Customize
 
-The prompt and tool rows live in the `preset-paper` row of `cordis.patch.yml`; the LaTeX skill lives in `skills/latex-paper/`. Reinstall the bundle after editing, and create a new session. `persona.prefix` and `suffix` are templates: do not use double braces in the body, or they are parsed as prompt variables.
+The prompt and tool rows live in the `preset-paper` row of `cordis.patch.yml`; the skills live in `skills/latex-paper/` and `skills/paper-decisions/`. Reinstall the bundle after editing, and create a new session. `persona.prefix` and `suffix` are templates: do not use double braces in the body, or they are parsed as prompt variables.

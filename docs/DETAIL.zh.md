@@ -30,6 +30,7 @@
 - 命令行：Linux 与 macOS 用 bash，Windows 用 PowerShell（按宿主平台自动启用）
 - Web 搜索与抓取，用于核对真实文献
 - LaTeX 技能：引擎与工具链检查、构建脚本、工程模板、报错与投稿参考
+- 决策记录技能：在论文仓库里维护只追加的决策日志与理论结构映射，改前读、改后写，并提供冲突检查程序
 - 办公文档技能与 Office 渲染/转换，用于 docx 交付和 PDF 版面检查
 - 任务清单、向用户提问、工作目录、交付声明
 - 子代理与 workflow：并行检索、分章草稿、独立审稿
@@ -56,4 +57,4 @@
 
 ## 修改
 
-提示词与工具都在 `cordis.patch.yml` 的 `preset-paper` 行内；LaTeX 技能在 `skills/latex-paper/`。改完后重新安装 bundle，新会话即使用新定义。`persona.prefix` 与 `suffix` 是模板，正文不要出现双层花括号，否则会被当作提示变量解析。
+提示词与工具都在 `cordis.patch.yml` 的 `preset-paper` 行内；技能在 `skills/latex-paper/` 与 `skills/paper-decisions/`。改完后重新安装 bundle，新会话即使用新定义。`persona.prefix` 与 `suffix` 是模板，正文不要出现双层花括号，否则会被当作提示变量解析。

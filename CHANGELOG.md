@@ -2,6 +2,24 @@
 
 All notable changes to this project are documented in this file. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-11-22
+
+### Added
+
+- `paper-decisions` skill: a decision record for papers revised across sessions. It keeps two files in the paper repository — an append-only `decisions.md` (date, type, trigger, options, criteria, ruling, reason, impact, status) and a living `theory-map.md` (theory → construct → operationalization → section → test, with a Mermaid graph) — and specifies the loop that makes them useful: read the relevant rulings before a structural revision, ask the user when a new change contradicts one, append after, and mark superseded entries instead of deleting them.
+- Literature decisions are covered by the same log: why a paper was kept, dropped, or only mentioned in the discussion, with the criteria recorded rather than a bare "not relevant".
+- A conflict-check procedure: compress each settled ruling into a testable proposition, compare it against the abstract and introduction's promises, the hypotheses and model, and the conclusion, then report mutual exclusion, tension, or no conflict — with locations and suggested precedence, without editing on its own.
+- One persona line points at the skill and fixes the trigger: a user comment, or the model restructuring on its own.
+
+### Changed
+
+- The persona grows by about 90 characters (3,482 → 3,572); the skill carries the detail, so nothing else is added to the standing prompt.
+
+### Notes
+
+- Mermaid renders in Typora, Obsidian, and GitHub, but not in the DSH chat renderer, which has no diagram support; the skill therefore tells the model to use a table or an outline in chat and to keep the Mermaid block for the file.
+- The record stores decisions and their reasons, not model reasoning traces: internal reasoning cannot be reviewed, so logging it would only add noise.
+
 ## [1.3.0] - 2026-11-19
 
 ### Added
@@ -59,6 +77,7 @@ All notable changes to this project are documented in this file. The format foll
 
 - Initial public snapshot of the paper-writing preset: a standing Chinese methodology prompt, 17 plugin rows, Chinese and English Plugins-page locale files, an icon, and the MIT license.
 
+[1.4.0]: https://github.com/revive/dsh-paper-mode/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/revive/dsh-paper-mode/compare/v1.2.1...v1.3.0
 [1.2.1]: https://github.com/revive/dsh-paper-mode/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/revive/dsh-paper-mode/compare/v1.1.0...v1.2.0

@@ -37,7 +37,19 @@ The mode was originally developed on Windows; it now treats Linux and macOS as f
 
 ## LaTeX support
 
-The bundle ships a `latex-paper` skill, mounted automatically through `skill-filesystem`:
+The bundle ships two skills, mounted automatically through `skill-filesystem`:
+
+```text
+skills/paper-decisions/
+├── SKILL.md                     # decision log + theory map: read before revising, append after
+└── templates/
+    ├── decisions.md             # append-only log: date/type/trigger/options/criteria/ruling/reason/impact/status
+    └── theory-map.md            # theory -> construct -> operationalization -> section -> test, plus a mermaid graph
+```
+
+`paper-decisions` covers what a paper loses between sessions: why an opinion was adopted or rejected, how competing options were judged, why one reference was kept and another dropped, and how the theory structure maps onto chapters. Before a structural revision the mode reads the relevant rulings; after it, appends one. The mermaid block renders in Typora, Obsidian, and GitHub, not in the DSH chat — the chat gets a table or an outline.
+
+The second skill is `latex-paper`:
 
 ```text
 skills/latex-paper/
@@ -150,7 +162,9 @@ The methodology prompt is Chinese by design. [docs/PROMPT-LANGUAGE.md](docs/PROM
 │   ├── DETAIL.en.md            # Plugins detail page (English)
 │   ├── DETAIL.zh.md            # Plugins detail page (Chinese)
 │   └── DEPENDENCIES.md         # dependency matrix and compatibility policy
-├── skills/latex-paper/         # bundled LaTeX skill (references, scripts, templates)
+├── skills/
+│   ├── latex-paper/            # LaTeX skill (references, scripts, templates)
+│   └── paper-decisions/        # decision log + theory map skill (templates)
 ├── scripts/check-bundle.mjs    # validation used by CI and contributors
 ├── .github/                    # CI and release workflows, topic list, helper scripts
 ├── CHANGELOG.md

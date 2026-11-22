@@ -1,6 +1,6 @@
 {
   "name": "dsh-paper-mode",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "type": "module",
   "description": "DeepSeek Harness agent preset for academic paper writing: topic framing, literature review, structure and argument, language editing, citation practice, LaTeX builds, and submission review.",
   "license": "MIT",
